@@ -59,13 +59,6 @@ def perturb_single_instance(
 
     # Get the original prediction
     original_prediction = model(data_point_values.unsqueeze(0)).argmax().item()
-    original_probs = (
-        torch.softmax(model(data_point_values.unsqueeze(0)), dim=1)
-        .detach()
-        .cpu()
-        .numpy()
-        .flatten()
-    )
 
     flip_steps = []
     perturbed_data = data_point_values.clone()

@@ -1,3 +1,4 @@
+import random
 import time
 from typing import Dict, List, Callable, Tuple, Any, Union
 
@@ -6,19 +7,22 @@ import torch
 
 
 def get_subset_samples(
-    test_data: torch.Tensor,
-    test_labels: torch.Tensor,
-    model: torch.nn.Module,
-    device: str = "cpu",
+        test_data: torch.Tensor,
+        test_labels: torch.Tensor,
+        model: torch.nn.Module,
+        device: str = "cpu",
+        use_random: bool = False
 ) -> Dict[str, List[int]]:
     """
     Categorize samples into FP, TP, FN, TN and return their indices.
+    When `use_random` is set to True, random data points are selected for each category.
 
     Args:
         test_data (torch.Tensor): Tensor of test features (e.g., input data for classification).
         test_labels (torch.Tensor): Tensor of true test labels (e.g., ground truth labels for classification).
         model (torch.nn.Module): The trained PyTorch model used for prediction.
         device (str, optional): The device to run the model on ('cpu' or 'cuda'). Defaults to 'cpu'.
+        use_random (bool, optional): If True, selects random samples. If False, selects the first available sample. Defaults to False.
 
     Returns:
         Dict[str, List[int]]: A dictionary containing lists of indices for False Positive (FP), True Positive (TP),
@@ -36,9 +40,7 @@ def get_subset_samples(
     # Get model predictions
     with torch.no_grad():
         outputs = model(test_data)
-        predicted_labels = torch.argmax(
-            outputs, dim=1
-        )  # Convert logits to class predictions
+        predicted_labels = torch.argmax(outputs, dim=1)  # Convert logits to class predictions
 
     # Compute categories (FP, TP, FN, TN)
     fp = (predicted_labels == 1) & (test_labels == 0)  # False Positive
@@ -46,13 +48,24 @@ def get_subset_samples(
     fn = (predicted_labels == 0) & (test_labels == 1)  # False Negative
     tn = (predicted_labels == 0) & (test_labels == 0)  # True Negative
 
-    # Select one sample from each category (if available)
-    selected_indices = {
-        "FP": torch.where(fp)[0][:1].tolist(),
-        "TP": torch.where(tp)[0][:1].tolist(),
-        "FN": torch.where(fn)[0][:1].tolist(),
-        "TN": torch.where(tn)[0][:1].tolist(),
-    }
+    # Select random sample from each category (if available)
+    selected_indices = {}
+    categories = {"FP": fp, "TP": tp, "FN": fn, "TN": tn}
+
+    for category, mask in categories.items():
+        indices = torch.where(mask)[0].tolist()  # Get all indices that match the condition
+
+        if indices:
+            if use_random:
+                random.seed()
+                # Randomly select an index
+                selected_indices[category] = [random.choice(indices)]
+            else:
+                # Choose the first index
+                selected_indices[category] = [indices[0]]
+        else:
+            # If no samples in the category, set it to an empty list
+            selected_indices[category] = []
 
     return selected_indices
 

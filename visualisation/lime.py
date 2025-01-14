@@ -10,19 +10,26 @@ def plot_perturbation_steps(perturbation_results: Dict[str, list]) -> None:
     Plots the perturbation steps and indicates when the prediction flips.
 
     Args:
-        perturbation_results (dict): Dictionary containing 'flip_steps', 'original_prediction', and 'perturbed_prediction'.
+        perturbation_results (dict): Dictionary containing 'flip_steps', and 'original_prediction'.
             - 'flip_steps' (list): List of perturbation steps where the prediction flipped.
             - 'original_prediction' (int): The original model's prediction before perturbation.
-            - 'perturbed_prediction' (int): The model's prediction after perturbation.
 
     Returns:
         None: Displays a plot showing the perturbation steps and when the prediction flipped.
     """
     flip_steps = perturbation_results["flip_steps"]
+    original_prediction = perturbation_results['original_prediction']
 
-    # Plotting flip steps
-    plt.plot(flip_steps, [1] * len(flip_steps), "ro", label="Prediction Flip")
-    plt.axhline(y=1, color="g", linestyle="--", label="Original Prediction")
+    # The perturbed prediction is the opposite of the original prediction
+    perturbed_prediction = 1 - original_prediction
+
+    # Plotting the flip steps as individual points where the prediction flipped
+    # Flip steps will be at the opposite value of the original prediction
+    plt.plot(flip_steps, [perturbed_prediction] * len(flip_steps), 'ro', label="Prediction Flip")
+
+    # Plotting the original prediction as a constant line at 0 or 1
+    plt.axhline(y=original_prediction, color="g", linestyle="--", label="Original Prediction")
+
     plt.xlabel("Number of Perturbed Features")
     plt.ylabel("Prediction Status")
     plt.title("Perturbation Steps and Prediction Flips")
