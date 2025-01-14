@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import torch
 
+
 def getBreastData():
     """
     Loads and returns the Breast Cancer Data, properly split into
@@ -16,16 +17,20 @@ def getBreastData():
     feature_names = data.feature_names
 
     # Split into train+val and test
-    X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    X_temp, X_test, y_temp, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
 
     # Split train+val into train and validation
-    X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.25, random_state=42, stratify=y_temp)
+    X_train, X_val, y_train, y_val = train_test_split(
+        X_temp, y_temp, test_size=0.25, random_state=42, stratify=y_temp
+    )
 
     # Normalize the features using StandardScaler
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)  # Fit on train data and transform
-    X_val = scaler.transform(X_val)         # Transform validation data
-    X_test = scaler.transform(X_test)       # Transform test data
+    X_val = scaler.transform(X_val)  # Transform validation data
+    X_test = scaler.transform(X_test)  # Transform test data
 
     # Convert to PyTorch tensors
     X_train_tensor = torch.tensor(X_train, dtype=torch.float32)
