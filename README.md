@@ -1,7 +1,9 @@
-# README: Binary Classification with LIME Explanations
+# README: Explainable AI Library for Binary Classification
 
 ## Overview
-This project involves building, training, and evaluating a binary classification model on the Breast Cancer Wisconsin dataset. The task also includes generating and analyzing explanations for the model's predictions using LIME and other XAI techniques. The following sections outline the key steps, tools, and files included in this project.
+This library is an Explainable AI (XAI) toolkit designed to provide transparency in machine learning models by generating interpretable explanations for predictions. It currently focuses on binary classification tasks, leveraging modularized and functional components to ensure flexibility and scalability. As the library evolves, more explainable algorithms will be integrated, making it a comprehensive XAI resource.
+
+The core functionality is built around LIME (Local Interpretable Model-agnostic Explanations), allowing users to analyze and understand model predictions at a granular level. The project structure ensures each component has a distinct role, simplifying integration, testing, and expansion. All tasks, from data preparation to model training, evaluation, and explanation generation, are demonstrated in the `main.ipynb` file for clarity and reproducibility.
 
 ---
 
@@ -28,29 +30,29 @@ This project involves building, training, and evaluating a binary classification
     |-- __init__.py
 ```
 
-### Key Directories and Files
-- **`data/`**: Contains the code for dataset preparation and loading.
+### Key Components
+- **`data/`**: Code for dataset preparation and loading.
   - `breast_data.py`: Prepares the Breast Cancer Wisconsin dataset.
 
-- **`lime_analysis/`**: Handles LIME explanations and evaluation.
-  - `lime_explanations.py`: Generates explanations using LIME.
-  - `perturbation.py`: Implements perturbation analysis.
-  - `utils.py`: Utility functions for explanation and evaluation.
+- **`lime_analysis/`**: Handles LIME-based explanations and related evaluation.
+  - `lime_explanations.py`: Generates LIME explanations.
+  - `perturbation.py`: Implements perturbation analysis for explanation evaluation.
+  - `utils.py`: Provides utility functions for explanation and evaluation.
 
-- **`main.ipynb`**: Jupyter Notebook containing the end-to-end implementation of the task.
+- **`main.ipynb`**: Jupyter Notebook with the complete pipeline for model training, evaluation, and explanation generation.
 
-- **`model/`**: Contains the model architecture, loss functions, and training logic.
-  - `linear.py`: Defines the linear neural network.
-  - `loss.py`: Custom loss functions (if any).
-  - `training.py`: Handles model training and evaluation.
+- **`model/`**: Contains the model architecture, loss functions, and training pipeline.
+  - `linear.py`: Defines a linear neural network for binary classification.
+  - `loss.py`: Custom loss functions (if required).
+  - `training.py`: Manages training and evaluation logic.
 
-- **`visualisation/`**: Visualization of model performance and explanations.
-  - `lime.py`: Visualizes LIME explanations.
-  - `metrics.py`: Plots performance metrics (e.g., accuracy, F1-score, ROC).
+- **`visualisation/`**: Tools for visualizing model performance and explanations.
+  - `lime.py`: Visualizes LIME-generated explanations.
+  - `metrics.py`: Plots performance metrics such as accuracy, F1-score, and ROC curves.
 
 ---
 
-## Getting Started
+## Installation and Setup
 
 ### Prerequisites
 - Python 3.8+
@@ -64,7 +66,7 @@ This project involves building, training, and evaluating a binary classification
   - `matplotlib`
   - `seaborn`
 
-### Installation
+### Installation Steps
 1. Clone the repository:
    ```bash
    git clone [repository URL]
@@ -78,67 +80,38 @@ This project involves building, training, and evaluating a binary classification
 ### Dataset Preparation
 1. Download the Breast Cancer Wisconsin dataset from:
    - [UCI ML Repository](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic)
-2. Save the dataset in a suitable location (if required).
-3. Load the dataset using `data/breast_data.py`.
+2. Save the dataset in the appropriate location (if required).
+3. Load and preprocess the dataset using `data/breast_data.py`.
 
 ---
 
-## Steps to Execute
+## Execution Guide
 
 ### 1. Build and Train the Model
-- **Model Architecture**: Linear neural network implemented in `model/linear.py`.
-- **Training**: Train the model using the logic in `model/training.py`.
-- **Evaluation Metrics**:
-  - Accuracy over epochs
-  - F1-Score over epochs
-  - ROC Curve and AUC
+- Use the linear neural network defined in `model/linear.py`.
+- Train and evaluate the model using `model/training.py`.
+- Evaluate key metrics, including accuracy, F1-score, and ROC-AUC.
 
-### 2. Generate Explanations with LIME
-- Select a subset of test samples.
-- Generate explanations using `lime_analysis/lime_explanations.py`.
+### 2. Generate LIME Explanations
+- Select test samples and generate explanations with `lime_analysis/lime_explanations.py`.
+- Evaluate explanations using perturbation analysis (`lime_analysis/perturbation.py`).
 
-### 3. Evaluate Explanations
-- Metrics:
-  - **Time**: Time taken to generate explanations.
-  - **Parsimony**: Count of features with importance above a threshold.
-  - **Correctness**: Perturbation analysis using `lime_analysis/perturbation.py`.
+### 3. Visualization and Analysis
+- Visualize performance metrics with `visualisation/metrics.py`.
+- Display LIME explanations using `visualisation/lime.py`.
 
-### 4. Visualization
-- Performance metrics plotted using `visualisation/metrics.py`.
-- LIME explanations visualized in `visualisation/lime.py`.
+### 4. Run the Complete Workflow
+- The `main.ipynb` notebook demonstrates the end-to-end process, integrating all the steps mentioned above. It includes detailed code and explanations for every task, making it easy to replicate and extend.
 
 ---
 
 ## Output
 
-### Files Produced
-1. **Jupyter Notebook** (`main.ipynb`): Contains all code and explanations.
-2. **Rendered Notebook**: HTML/PDF output of `main.ipynb` with results.
-3. **Supporting Scripts**:
-   - Python scripts used as imports in the notebook.
-
----
-
-## Evaluation Metrics
-- **Model Performance**:
-  - Accuracy, F1-Score, ROC-AUC
-- **Explanation Evaluation**:
-  - Average time, parsimony, and correctness (perturbation analysis).
-
----
-
-## Challenges and Notes
-### Challenges Encountered
-_TODO: Describe any significant challenges or limitations faced during the implementation._
-
-### Assumptions and Simplifications
-_TODO: Specify any assumptions or simplifications made._
-
----
-
-## Appendix
-- **Perturbation Curve**: Explanation and methodology used.
-- **Scaling Technique**: Details on feature scaling for parsimony analysis.
+### Key Deliverables
+1. **Trained Model**: A binary classifier trained on the Breast Cancer Wisconsin dataset.
+2. **Explanations**: LIME-based insights for model predictions.
+3. **Performance Metrics**: Accuracy, F1-score, ROC-AUC, and visual plots.
+4. **Notebook**: Complete implementation in `main.ipynb` for easy replication.
 
 ---
 
