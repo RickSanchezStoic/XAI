@@ -1,10 +1,9 @@
 # README: Explainable AI Library for Binary Classification
 
 ## Overview
-This library is an Explainable AI (XAI) toolkit designed to provide transparency in machine learning models by generating interpretable explanations for predictions. It currently focuses on binary classification tasks, leveraging modularized and functional components to ensure flexibility and scalability. As the library evolves, more explainable algorithms will be integrated, making it a comprehensive XAI resource.
+This library helps explain how machine learning models make predictions, focusing on binary classification tasks. It uses simple and flexible parts that work together, making it easy to expand in the future with more explanation methods.
 
-The core functionality is built around LIME (Local Interpretable Model-agnostic Explanations), allowing users to analyze and understand model predictions at a granular level. The project structure ensures each component has a distinct role, simplifying integration, testing, and expansion. All tasks, from data preparation to model training, evaluation, and explanation generation, are demonstrated in the `main.ipynb` file for clarity and reproducibility.
-
+The main feature is LIME (Local Interpretable Model-agnostic Explanations), which helps users understand predictions in detail. The project is well-organized, with each part handling a specific task. The main.ipynb file shows the complete process, from preparing data to training models and creating explanations, making it easy to follow and use.
 ---
 
 ## Project Structure
@@ -56,7 +55,7 @@ The core functionality is built around LIME (Local Interpretable Model-agnostic 
 
 ### Prerequisites
 - Python 3.8+
-- Required libraries:
+- Main Required libraries:
   - `numpy`
   - `pandas`
   - `scikit-learn`
@@ -76,12 +75,24 @@ The core functionality is built around LIME (Local Interpretable Model-agnostic 
    ```bash
    pip install -r requirements.txt
    ```
+3. Linux/macOS Setup (using Conda):
 
-### Dataset Preparation
-1. Download the Breast Cancer Wisconsin dataset from:
-   - [UCI ML Repository](https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic)
-2. Save the dataset in the appropriate location (if required).
-3. Load and preprocess the dataset using `data/breast_data.py`.
+    Execute the setup.sh script to install dependencies and set up the environment:
+   
+    ```
+    chmod +x setup.sh  # Make the script executable (if not already)
+    ./setup.sh
+    ```
+4. Windows Setup (using Conda):
+
+    Execute the setup.bat script to install dependencies and set up the environment:
+    ```
+    setup.bat
+    ```
+5.  Install additional dependencies (if needed):
+    ```
+    pip install -r requirements.txt
+    ```
 
 ---
 
@@ -117,11 +128,8 @@ The core functionality is built around LIME (Local Interpretable Model-agnostic 
 
 ## Contact
 For queries or clarifications, please contact:
-- Name: [Your Name]
-- Email: [Your Email]
+- Name: Rishabh Kumar
+- Email: rishabh.kumar@edu.rptu.de
 
----
 
-## License
-_TODO: Specify the license under which this project is shared._
 
