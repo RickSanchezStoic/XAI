@@ -18,17 +18,24 @@ def plot_perturbation_steps(perturbation_results: Dict[str, list]) -> None:
         None: Displays a plot showing the perturbation steps and when the prediction flipped.
     """
     flip_steps = perturbation_results["flip_steps"]
-    original_prediction = perturbation_results['original_prediction']
+    original_prediction = perturbation_results["original_prediction"]
 
     # The perturbed prediction is the opposite of the original prediction
     perturbed_prediction = 1 - original_prediction
 
     # Plotting the flip steps as individual points where the prediction flipped
     # Flip steps will be at the opposite value of the original prediction
-    plt.plot(flip_steps, [perturbed_prediction] * len(flip_steps), 'ro', label="Prediction Flip")
+    plt.plot(
+        flip_steps,
+        [perturbed_prediction] * len(flip_steps),
+        "ro",
+        label="Prediction Flip",
+    )
 
     # Plotting the original prediction as a constant line at 0 or 1
-    plt.axhline(y=original_prediction, color="g", linestyle="--", label="Original Prediction")
+    plt.axhline(
+        y=original_prediction, color="g", linestyle="--", label="Original Prediction"
+    )
 
     plt.xlabel("Number of Perturbed Features")
     plt.ylabel("Prediction Status")
@@ -117,21 +124,27 @@ def visualize_aupc(aupc_dict: dict[str, float], normalize: bool = False) -> None
 
     # Plotting
     plt.figure(figsize=(8, 5))
-    bars = plt.bar(categories, values, color='skyblue', alpha=0.8, edgecolor='black')
+    bars = plt.bar(categories, values, color="skyblue", alpha=0.8, edgecolor="black")
 
     # Adding value annotations on top of bars
     for bar, value in zip(bars, values):
         plt.text(
             bar.get_x() + bar.get_width() / 2,
-            bar.get_height() + (0.01 if normalize else 0.5),  # Adjust position based on normalization
+            bar.get_height()
+            + (0.01 if normalize else 0.5),  # Adjust position based on normalization
             f"{value:.2f}",
-            ha='center', va='bottom', fontsize=10, fontweight='bold'
+            ha="center",
+            va="bottom",
+            fontsize=10,
+            fontweight="bold",
         )
 
-    plt.title("AUPC Values Across Categories", fontsize=14, fontweight='bold')
+    plt.title("AUPC Values Across Categories", fontsize=14, fontweight="bold")
     plt.xlabel("Categories", fontsize=12)
     plt.ylabel("AUPC Values" + (" (Normalized)" if normalize else ""), fontsize=12)
-    plt.ylim(0, 1 if normalize else values.max() + 1)  # Adjust y-limit for normalization
-    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.ylim(
+        0, 1 if normalize else values.max() + 1
+    )  # Adjust y-limit for normalization
+    plt.grid(axis="y", linestyle="--", alpha=0.7)
     plt.tight_layout()
     plt.show()

@@ -7,11 +7,11 @@ import torch
 
 
 def get_subset_samples(
-        test_data: torch.Tensor,
-        test_labels: torch.Tensor,
-        model: torch.nn.Module,
-        device: str = "cpu",
-        use_random: bool = False
+    test_data: torch.Tensor,
+    test_labels: torch.Tensor,
+    model: torch.nn.Module,
+    device: str = "cpu",
+    use_random: bool = False,
 ) -> Dict[str, List[int]]:
     """
     Categorize samples into FP, TP, FN, TN and return their indices.
@@ -40,7 +40,9 @@ def get_subset_samples(
     # Get model predictions
     with torch.no_grad():
         outputs = model(test_data)
-        predicted_labels = torch.argmax(outputs, dim=1)  # Convert logits to class predictions
+        predicted_labels = torch.argmax(
+            outputs, dim=1
+        )  # Convert logits to class predictions
 
     # Compute categories (FP, TP, FN, TN)
     fp = (predicted_labels == 1) & (test_labels == 0)  # False Positive
@@ -53,7 +55,9 @@ def get_subset_samples(
     categories = {"FP": fp, "TP": tp, "FN": fn, "TN": tn}
 
     for category, mask in categories.items():
-        indices = torch.where(mask)[0].tolist()  # Get all indices that match the condition
+        indices = torch.where(mask)[
+            0
+        ].tolist()  # Get all indices that match the condition
 
         if indices:
             if use_random:
