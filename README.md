@@ -85,13 +85,8 @@ This library helps explain how machine learning models make predictions, focusin
     chmod +x setup.sh  # Make the script executable (if not already)
     ./setup.sh
     ```
-4. Windows Setup (using Conda):
 
-    Execute the setup.bat script to install dependencies and set up the environment:
-    ```
-    setup.bat
-    ```
-5.  Install additional dependencies (if needed):
+4. Install additional dependencies (if needed)(only main dependencies listed, additional requirements might be needed):
     ```
     pip install -r requirements.txt
     ```
