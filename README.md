@@ -1,9 +1,9 @@
 # README: Explainable AI Library for Binary Classification
 
 ## Overview
-This library helps explain how machine learning models make predictions, focusing on binary classification tasks. It uses simple and flexible parts that work together, making it easy to expand in the future with more explanation methods.
+This library helps explain how machine learning models make predictions, focusing on binary classification tasks. It uses simple and flexible parts that work together, making it easy to expand in the future with more explanation methods.The main feature is LIME (Local Interpretable Model-agnostic Explanations), which helps users understand predictions in detail. The project is well-organized, with each part handling a specific task. The main.ipynb file shows the complete process, from preparing data to training models and creating explanations, making it easy to follow and use
 
-The main feature is LIME (Local Interpretable Model-agnostic Explanations), which helps users understand predictions in detail. The project is well-organized, with each part handling a specific task. The main.ipynb file shows the complete process, from preparing data to training models and creating explanations, making it easy to follow and use.
+
 ---
 
 ## Project Structure
