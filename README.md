@@ -40,6 +40,7 @@ This library helps explain how machine learning models make predictions, focusin
   - `utils.py`: Provides utility functions for explanation and evaluation.
 
 - **`main.ipynb`**: Jupyter Notebook with the complete pipeline for model training, evaluation, and explanation generation.
+- **`main_output.html`**: The output of the jupyter notebook, saved as HTML.
 
 - **`model/`**: Contains the model architecture, loss functions, and training pipeline.
   - `linear.py`: Defines a linear neural network for binary classification.
